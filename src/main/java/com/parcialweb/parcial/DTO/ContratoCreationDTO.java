@@ -1,5 +1,16 @@
 package com.parcialweb.parcial.DTO;
 
-public class ContratoCreationDTO {
+import lombok.Data;
+import java.util.Date;
 
+@Data
+public class ContratoCreationDTO {
+    private String identificador;
+    private String nombreContratante;
+    private String documentoContratante;
+    private String nombreContratista;
+    private String documentoContratista;
+    private Date fechaInicio;
+    private Date fechaFin;
+    private Long entidadId;
 }

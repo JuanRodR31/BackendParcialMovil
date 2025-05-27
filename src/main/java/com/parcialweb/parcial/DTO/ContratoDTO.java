@@ -9,6 +9,8 @@ public class ContratoDTO {
     private String identificador;
     private String nombreContratante;
     private String documentoContratante;
+    private String nombreContratista;
+    private String documentoContratista;
     private Date fechaInicio;
     private Date fechaFin;
     private Long entidadId;
