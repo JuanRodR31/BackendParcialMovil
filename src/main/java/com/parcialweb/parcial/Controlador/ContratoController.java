@@ -18,21 +18,18 @@ public class ContratoController {
     @Autowired
     private ContratoService contratoService;
 
-    // 1. Insertar un nuevo registro
     @PostMapping
     public ResponseEntity<ContratoDTO> createContrato(@RequestBody ContratoCreationDTO contratoCreationDTO) {
         ContratoDTO savedContratoDTO = contratoService.saveContrato(contratoCreationDTO);
         return new ResponseEntity<>(savedContratoDTO, HttpStatus.CREATED);
     }
 
-    // 2. Consultar todos los registros
     @GetMapping
     public ResponseEntity<List<ContratoDTO>> getAllContratos() {
         List<ContratoDTO> contratos = contratoService.getAllContratos();
         return new ResponseEntity<>(contratos, HttpStatus.OK);
     }
 
-    // 3. Consultar un registro por ID
     @GetMapping("/{id}")
     public ResponseEntity<ContratoDTO> getContratoById(@PathVariable Long id) {
         return contratoService.getContratoById(id)
@@ -40,7 +37,6 @@ public class ContratoController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    // 4. Actualizar registro
     @PutMapping("/{id}")
     public ResponseEntity<ContratoDTO> updateContrato(@PathVariable Long id, @RequestBody ContratoCreationDTO contratoDetailsDTO) {
         try {
@@ -51,7 +47,6 @@ public class ContratoController {
         }
     }
 
-    // 5. Eliminar registro
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteContrato(@PathVariable Long id) {
         contratoService.deleteContrato(id);

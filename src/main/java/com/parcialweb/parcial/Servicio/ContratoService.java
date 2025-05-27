@@ -67,22 +67,14 @@ public class ContratoService {
         Optional<Contrato> optionalContrato = contratoRepository.findById(id);
         if (optionalContrato.isPresent()) {
             Contrato contrato = optionalContrato.get();
-
-            // ModelMapper se encargará de mapear los campos existentes y los nuevos
-            // (nombreContratista, documentoContratista) del DTO a la entidad.
             modelMapper.map(contratoDetailsDTO, contrato);
-
-            // Actualiza la relación con la Entidad si se proporciona un nuevo entidadId
             if (contratoDetailsDTO.getEntidadId() != null) {
-                // Solo busca y actualiza si el ID de la entidad en el DTO es diferente
-                // del ID de la entidad actual en el contrato, o si el contrato no tiene una entidad asociada
                 if (contrato.getEntidad() == null || !contratoDetailsDTO.getEntidadId().equals(contrato.getEntidad().getId())) {
                     Entidad entidad = entidadRepository.findById(contratoDetailsDTO.getEntidadId())
                             .orElseThrow(() -> new RuntimeException("Entidad no encontrada con id " + contratoDetailsDTO.getEntidadId()));
                     contrato.setEntidad(entidad);
                 }
             } else {
-                // Si el entidadId en el DTO es null, y el contrato tenía una entidad, la desasocia
                 contrato.setEntidad(null);
             }
 
